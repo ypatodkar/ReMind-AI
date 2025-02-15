@@ -1,19 +1,41 @@
-import React from 'react'
-import { useClerk } from '@clerk/clerk-react'
+import React from 'react';
+import { useClerk } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthPage = () => {
-  const { openSignUp } = useClerk() // Use Clerk's openSignUp function to open the sign-up flow
+  const { openSignIn, openSignUp } = useClerk();
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    openSignIn({
+      redirectUrl: '/dashboard',
+      afterSignInUrl: '/dashboard'
+    });
+  };
+
+  const handleSignUp = () => {
+    openSignUp({
+      redirectUrl: '/dashboard',
+      afterSignUpUrl: '/dashboard'
+    });
+  };
 
   return (
-    <div className="flex h-screen justify-center items-center bg-gray-100">
+    <div className="min-h-screen bg-black flex items-center justify-center gap-6">
       <button
-        onClick={() => openSignUp()}
-        className="px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-lg"
+        onClick={handleSignUp}
+        className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
       >
-        Join In
+        New User
+      </button>
+      <button
+        onClick={handleSignIn}
+        className="px-6 py-3 bg-transparent text-white font-semibold border-2 border-white rounded-lg hover:bg-white hover:text-black transition-colors"
+      >
+        Get In
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default AuthPage
+export default AuthPage;
