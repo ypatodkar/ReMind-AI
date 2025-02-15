@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import React from 'react';
 
@@ -25,6 +26,13 @@ function App() {
       </p>
     </>
   )
+=======
+const App = () => {
+  return (
+    <div>
+      
+    </div>
+  );
+>>>>>>> a2fe061e11878adf831ba5227610c2782fd23ace
 }
-
-export default App
+export default App;
