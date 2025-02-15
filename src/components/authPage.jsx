@@ -15,7 +15,7 @@ const AuthPage = () => {
 
   const handleSignUp = () => {
     openSignUp({
-      redirectUrl: '/dashboard',
+      redirectUrl: '/NewUserForm',
       afterSignUpUrl: '/dashboard'
     });
   };
