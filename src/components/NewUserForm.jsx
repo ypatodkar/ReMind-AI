@@ -62,7 +62,7 @@ const NewUserForm = () => {
       user_id: localStorage.getItem('user_id') || "123",
       responses: questionsPayload,
       score: {
-        todayDate: String(totalScore)
+        [todayDate]: String(totalScore)
       }
     };
 
