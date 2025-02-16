@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import img from '../images/Subject.png';
 
 const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -25,9 +26,7 @@ const AuthPage = () => {
       if (!response.ok) {
         throw new Error(data.message || 'Authentication failed');
       }
-      // Store user_id in localStorage for global access
       localStorage.setItem('user_id', data.user_id);
-      // If signing up, navigate to /userForm, otherwise navigate to /dashboard
       if (isSignUp) {
         navigate('/userForm');
       } else {
@@ -39,7 +38,15 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+      {/* Logo and App Name */}
+      <div className="flex flex-col items-center mb-6">
+        <img src={img} alt="ReMind AI Logo" className="w-20 h-20 mb-2" />
+        <h1 className="text-3xl font-bold text-gray-800">ReMind AI</h1>
+        <p className="text-gray-600 text-sm">Your AI-powered mental health companion</p>
+      </div>
+
+      {/* Authentication Form */}
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold text-center mb-4">{isSignUp ? 'Sign Up' : 'Login'}</h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
@@ -89,7 +96,7 @@ const AuthPage = () => {
         <p className="text-center text-sm text-gray-600 mt-4">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"} 
           <span 
-            className="text-blue-600 cursor-pointer" 
+            className="text-blue-600 cursor-pointer font-medium" 
             onClick={() => setIsSignUp(!isSignUp)}
           >
             {isSignUp ? ' Login' : ' Sign Up'}
