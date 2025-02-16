@@ -22,8 +22,6 @@ const AiResponse = ({ data = {} }) => {
           value={Array.isArray(data.emotions) ? data.emotions.map(e => e.name).join(", ") : "No emotions recorded"}
           readOnly
         />
-
-
         <div className="flex flex-col space-y-2">
           <div className="text-gray-700 font-semibold">Your Mood Activities:</div>
           <input
