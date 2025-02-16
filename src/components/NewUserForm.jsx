@@ -79,7 +79,7 @@ const NewUserForm = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-bold mb-4 text-center">New User Form</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Mental Health Questionnaire</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {sentencesData.sentences.map((sentence, index) => (
