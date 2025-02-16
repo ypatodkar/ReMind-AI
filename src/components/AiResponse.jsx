@@ -1,6 +1,6 @@
 import React from "react";
 
-const AiResponse = ({ data }) => {
+const AiResponse = ({ data = {} }) => {
   return (
     <div className="flex flex-col items-center space-y-8 p-6 bg-gradient-to-r from-green-100 via-blue-200 to-purple-300 rounded-lg shadow-xl max-w-3xl mx-auto">
       {/* Mood Section */}
@@ -10,7 +10,7 @@ const AiResponse = ({ data }) => {
           <input
             type="text"
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={data?.date || ""}
+            value={data.date ?? "No date available"}
             readOnly
           />
         </div>
@@ -20,7 +20,7 @@ const AiResponse = ({ data }) => {
           <input
             type="text"
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={data?.emotions?.join(", ") || ""}
+            value={Array.isArray(data.emotions) ? data.emotions.join(", ") : "No emotions recorded"}
             readOnly
           />
         </div>
@@ -30,7 +30,7 @@ const AiResponse = ({ data }) => {
           <input
             type="text"
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={data?.categories?.join(", ") || ""}
+            value={Array.isArray(data.categories) ? data.categories.join(", ") : "No activities recorded"}
             readOnly
           />
         </div>
@@ -39,7 +39,7 @@ const AiResponse = ({ data }) => {
           <div className="text-gray-700 font-semibold">Your Elaborated Text:</div>
           <textarea
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={data?.text || ""}
+            value={data.text ?? "No elaboration provided"}
             readOnly
             rows="4"
           />
@@ -53,7 +53,7 @@ const AiResponse = ({ data }) => {
         </h4>
         <textarea
           className="p-4 w-full h-40 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={data?.ai || "AI response is being generated..."}
+          value={data.ai ?? "AI response is being generated..."}
           readOnly
         />
       </div>

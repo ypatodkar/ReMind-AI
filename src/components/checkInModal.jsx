@@ -3,7 +3,7 @@ import Emotions from './emotions';
 import Activities from './activities';
 import UserText from './UserText';
 
-const CheckInModal = ({ isModalOpen, setIsModalOpen }) => {
+const CheckInModal = ({ isModalOpen, setIsModalOpen, setAiResponse }) => {
   const [step, setStep] = useState(1);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [selectedEmotions, setSelectedEmotions] = useState([]);
@@ -56,6 +56,7 @@ const CheckInModal = ({ isModalOpen, setIsModalOpen }) => {
                         
                         // Close modal after AI response is received
                         setIsModalOpen(false);
+                        setAiResponse(data); // Set the AI response in the parent component
                         setStep(1); 
 
                         return; // Exit the function once response is received

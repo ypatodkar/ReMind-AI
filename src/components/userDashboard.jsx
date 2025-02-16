@@ -5,6 +5,7 @@ import CheckInModal from './checkInModal';
 import CheckInButton from './CheckInButton';
 import Task from './Task';
 import Affirmation from './Affirmation';
+import AiResponse from './AiResponse';
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const UserDashboard = () => {
   const [checkedInDays, setCheckedInDays] = useState([]);
   const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
   const [isAffirmationModalOpen, setIsAffirmationModalOpen] = useState(false);
+  const [aiResponse, setAiResponse] = useState(null);
 
   // Fixed arrays for content
   const mentalHealthFacts = [
@@ -139,11 +141,12 @@ const UserDashboard = () => {
 
         {/* Modals */}
         {isCheckInModalOpen && (
-          <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} />
+          <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} setAiResponse={setAiResponse}/>
         )}
         {isAffirmationModalOpen && (
           <Affirmation closeModal={closeAffirmationModal} onDone={markAffirmationAsDone} />
         )}
+        {aiResponse ? <AiResponse data={aiResponse} /> : <p>Loading...</p>}
       </div>
     </>
   );
