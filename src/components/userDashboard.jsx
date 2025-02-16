@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './navBar';
-import CheckInModal from './CheckInModal';
+import CheckInModal from './checkInModal';
 import CheckInButton from './CheckInButton';
 import Task from './Task';
 import Affirmation from './Affirmation';

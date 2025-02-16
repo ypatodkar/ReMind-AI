@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-const AiResponse = () => {
+const AiResponse = ({ data }) => {
   return (
     <div className="flex flex-col items-center space-y-8 p-6 bg-gradient-to-r from-green-100 via-blue-200 to-purple-300 rounded-lg shadow-xl max-w-3xl mx-auto">
       {/* Mood Section */}
@@ -10,7 +10,8 @@ const AiResponse = () => {
           <input
             type="text"
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Describe your mood today"
+            value={data?.date || ""}
+            readOnly
           />
         </div>
 
@@ -19,7 +20,8 @@ const AiResponse = () => {
           <input
             type="text"
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="What emotions are you feeling?"
+            value={data?.emotions?.join(", ") || ""}
+            readOnly
           />
         </div>
 
@@ -28,7 +30,8 @@ const AiResponse = () => {
           <input
             type="text"
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="What activities have you done today?"
+            value={data?.categories?.join(", ") || ""}
+            readOnly
           />
         </div>
 
@@ -36,7 +39,8 @@ const AiResponse = () => {
           <div className="text-gray-700 font-semibold">Your Elaborated Text:</div>
           <textarea
             className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Please elaborate on your mood or activities..."
+            value={data?.text || ""}
+            readOnly
             rows="4"
           />
         </div>
@@ -44,14 +48,17 @@ const AiResponse = () => {
 
       {/* AI Generated Response Section */}
       <div className="bg-white p-6 rounded-lg shadow-md w-full">
-        <h4 className="text-xl font-semibold text-gray-800 mb-4">AI Generated Response:</h4>
+        <h4 className="text-xl font-semibold text-gray-800 mb-4">
+          AI Generated Response:
+        </h4>
         <textarea
           className="p-4 w-full h-40 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          defaultValue="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, optio voluptatum! Quis, sed cumque tenetur debitis magni similique tempora officiis et? Quae dolorem aliquid assumenda natus porro expedita modi cum?"
+          value={data?.ai || "AI response is being generated..."}
+          readOnly
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AiResponse;
