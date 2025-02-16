@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Emotions from './Emotions';
-import Activities from './Activities';
+import Emotions from './emotions';
+import Activities from './activities';
 import UserText from './UserText';
 
 const CheckInModal = ({ isModalOpen, setIsModalOpen }) => {
@@ -35,80 +35,81 @@ const CheckInModal = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   // Step 4: Submit text
-  const handleTextSubmit = async (text) => {
+  const checkAiResponse = async (user_id, entryId) => {
+    while (true) { // Keep retrying indefinitely
+        try {
+            console.log("Checking AI response...");
+            const aiResponse = await fetch(`http://127.0.0.1:5000/dashboard/entries?user_id=${user_id}&entry_id=${entryId}`);
+            console.log("AI Response Status:", aiResponse);
+            if (!aiResponse.ok) {
+                console.log("Error fetching AI response, retrying...");
+            } else {
+                const dataList = await aiResponse.json();
+                console.log("->>>>>",dataList)
+                const data = Array.isArray(dataList) ? dataList.find(entry => entry.entry_id === entryId) : dataList;
+
+                if (data) {
+                    console.log("Entry found:", data);
+                    if (data.ai) {
+                        console.log("AI Response Received:", data.ai);
+                        setEntry((prevEntry) => ({ ...prevEntry, ai: data.ai }));
+                        
+                        // Close modal after AI response is received
+                        setIsModalOpen(false);
+                        setStep(1); 
+
+                        return; // Exit the function once response is received
+                    } else {
+                        console.log("AI response not yet available, retrying...");
+                    }
+                } else {
+                    console.log("Entry not found yet, retrying...");
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching AI response:", error);
+        }
+
+        // Wait 2 seconds before retrying
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+};
+
+const handleTextSubmit = async (text) => {
     const currentDate = new Date().toLocaleDateString();
     const entryId = generateEntryId();
     const user_id = localStorage.getItem("user_id");
-  
+
     const newEntry = {
-      entry_id: String(entryId),
-      date: currentDate,
-      text: text,
-      emotions: selectedEmotions,
-      categories: selectedActivities,
-      ai: '',
-      user_id: user_id,
+        entry_id: String(entryId),
+        date: currentDate,
+        text: text,
+        emotions: selectedEmotions,
+        categories: selectedActivities,
+        ai: '',
+        user_id: user_id,
     };
-  
+
     setEntry(newEntry);
     console.log('Generated Entry:', newEntry);
-  
+
     try {
-      console.log("Submitting entry...");
-  
-      const response = await fetch('http://127.0.0.1:5000/dashboard/entries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newEntry),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to submit entry');
-      }
-  
-      console.log("Entry submitted successfully!");
-  
-      // Wait before checking AI response to ensure the entry is stored
-      // setTimeout(() => checkAiResponse(user_id, entryId), 3000);
-      await checkAiResponse(user_id, entryId)
+        console.log("Submitting entry...");
+        await fetch('http://127.0.0.1:5000/dashboard/entries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newEntry),
+        });
+
+        console.log("Entry submitted successfully!");
+
+        // Wait before checking AI response to ensure the entry is stored
+        await checkAiResponse(user_id, entryId);
     } catch (error) {
-      console.error('Error submitting entry:', error);
-    }
-  
-    // Close modal after submission
-    setIsModalOpen(false);
-    setStep(1);
-  };
-   
-  const checkAiResponse = async (user_id, entryId) => {
-    let value = true; // Correctly named variable
-
-    while (value) {
-      try {
-        console.log("Checking AI response...");
-        const aiResponse = await fetch(`http://127.0.0.1:5000/dashboard/entries?user_id=${user_id}&entry_id=${entryId}`);
-        
-        if (aiResponse.status === 404) {
-          console.log("Entry not found yet, retrying...");
-        } else if (!aiResponse.ok) {
-          throw new Error('Error fetching AI response');
-        } else {
-          const data = await aiResponse.json();
-          if (data && data.ai) {
-            console.log("AI Response Received:", data.ai);
-            setEntry((prevEntry) => ({ ...prevEntry, ai: data.ai }));
-            value = false; // Correctly stopping the loop
-            break; // Exit the loop
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching AI response:", error);
-      }
-
-      // Wait 2 seconds before retrying
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+        console.error('Error submitting entry:', error);
     }
 };
+
 
   if (!isModalOpen) return null;
 
