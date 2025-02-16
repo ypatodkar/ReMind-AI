@@ -4,6 +4,8 @@ import CheckInModal from './CheckInModal'; // Import CheckInModal
 import CheckInButton from './CheckInButton';
 import Task from './Task';
 import Affirmation from './Affirmation'; // Import Affirmation modal
+import NewUserStats from './NewUserStats';
+import AiResponse from './AiResponse';
 
 const UserDashboard = () => {
   const [checkedTasks, setCheckedTasks] = useState([]); // Task completion state
@@ -89,6 +91,8 @@ const UserDashboard = () => {
         {isCheckInModalOpen && <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} />}
         {isAffirmationModalOpen && <Affirmation closeModal={closeAffirmationModal} onDone={markAffirmationAsDone} />}
       </div>
+
+      
     </>
   );
 };
