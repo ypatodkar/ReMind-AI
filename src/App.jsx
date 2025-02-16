@@ -7,6 +7,7 @@ import NewUserForm from './components/NewUserForm';
 import UserDashboard from "./components/userDashboard";
 import Questionnaire, { QuestionnaireProvider } from './components/questionnaire';
 import AuthPage from './components/loginPage';
+import NewUserStats from './components/NewUserStats';
 
 
 
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<AuthPage />} />
         <Route path="/dashboard" element={<UserDashboard />} />  
         <Route path="/userForm" element={<NewUserForm />} />  
+        <Route path="/user-stats" element={<NewUserStats />} />  
         <Route 
           path="/autismTest" 
           element={
