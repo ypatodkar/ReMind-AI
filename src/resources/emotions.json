@@ -1,0 +1,138 @@
+{
+  "happy": {
+    "positive": {
+      "calm": "😊",
+      "confident": "😎",
+      "content": "😏",
+      "excited": "😝",
+      "fulfilled": "😋",
+      "grateful": "😊",
+      "happy": "🙂",
+      "hopeful": "😃",
+      "inspired": "😍",
+      "loved": "🥰",
+      "motivated": "😤",
+      "peaceful": "😇",
+      "proud": "😌",
+      "relieved": "😅"
+    },
+    "negative": {
+      "annoyed": "😠",
+      "anxious": "😱",
+      "disappointed": "😞",
+      "empty": "😐",
+      "frustrated": "😣",
+      "guilty": "😔",
+      "hopeless": "😢",
+      "lonely": "🙁",
+      "nervous": "😰",
+      "overwhelmed": "😵",
+      "sad": "☹️",
+      "stressed": "😬",
+      "tired": "😴",
+      "worried": "😢"
+    }
+  },
+  "sad": {
+    "positive": {
+      "calm": "🙂",
+      "confident": "😎",
+      "content": "😏",
+      "excited": "🤪",
+      "fulfilled": "😋",
+      "grateful": "😊",
+      "happy": "😊",
+      "hopeful": "😃",
+      "inspired": "🤩",
+      "loved": "🥰",
+      "motivated": "💪",
+      "peaceful": "😇",
+      "proud": "😌",
+      "relieved": "😮‍💨"
+    },
+    "negative": {
+      "annoyed": "😠",
+      "anxious": "😨",
+      "disappointed": "😞",
+      "empty": "😶",
+      "frustrated": "😣",
+      "guilty": "😔",
+      "hopeless": "😢",
+      "lonely": "😕",
+      "nervous": "😰",
+      "overwhelmed": "😵",
+      "sad": "😢",
+      "stressed": "😫",
+      "tired": "😴",
+      "worried": "😥"
+    }
+  },
+  "neutral": {
+    "positive": {
+      "calm": "😌",
+      "confident": "😎",
+      "content": "😊",
+      "excited": "😃",
+      "fulfilled": "🙂",
+      "grateful": "🙏",
+      "happy": "😄",
+      "hopeful": "👍",
+      "inspired": "🤩",
+      "loved": "❤️",
+      "motivated": "💪",
+      "peaceful": "😇",
+      "proud": "🙌",
+      "relieved": "😮‍💨"
+    },
+    "negative": {
+      "annoyed": "😒",
+      "anxious": "😟",
+      "disappointed": "😕",
+      "empty": "😐",
+      "frustrated": "😫",
+      "guilty": "😥",
+      "hopeless": "😔",
+      "lonely": "🙁",
+      "nervous": "😨",
+      "overwhelmed": "🤯",
+      "sad": "😞",
+      "stressed": "😰",
+      "tired": "😪",
+      "worried": "😟"
+    }
+  },
+  "excited": {
+    "positive": {
+      "calm": "😍",  
+      "confident": "😎",
+      "content": "🤩",
+      "excited": "🥳", 
+      "fulfilled": "🥰",
+      "grateful": "🙏",
+      "happy": "😀",
+      "hopeful": "🤞",
+      "inspired": "🌠", 
+      "loved": "💖",
+      "motivated": "🚀", 
+      "peaceful": "😌", 
+      "proud": "🏆",
+      "relieved": "🎉" 
+    },
+    "negative": {
+      "annoyed": "😤", 
+      "anxious": "😨", 
+      "disappointed": "😞", 
+      "empty": "😕",  
+      "frustrated": "😡", 
+      "guilty": "😳", 
+      "hopeless": "🤷", 
+      "lonely": "😔",
+      "nervous": "😬", 
+      "overwhelmed": "😵‍💫", 
+      "sad": "😥", 
+      "stressed": "🤯", 
+      "tired": "🥱", 
+      "worried": "😟" 
+    }
+  }
+}
