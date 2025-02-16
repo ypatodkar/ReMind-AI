@@ -1,6 +1,7 @@
 import React from "react";
 
 const AiResponse = ({ data = {} }) => {
+  console.log("AI Response Data:", data);
   return (
     <div className="flex flex-col items-center space-y-8 p-6 bg-gradient-to-r from-green-100 via-blue-200 to-purple-300 rounded-lg shadow-xl max-w-3xl mx-auto">
       {/* Mood Section */}
@@ -15,16 +16,12 @@ const AiResponse = ({ data = {} }) => {
           />
         </div>
 
-        <div className="flex flex-col space-y-2">
-          <div className="text-gray-700 font-semibold">Your Mood Emotions:</div>
-          <input
-            type="text"
-            className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={Array.isArray(data.emotions) ? data.emotions.join(", ") : "No emotions recorded"}
-            readOnly
-          />
-        </div>
-
+        <input
+          type="text"
+          className="p-2 border rounded-lg bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={Array.isArray(data.emotions) ? data.emotions.map(e => e.name).join(", ") : "No emotions recorded"}
+          readOnly
+        />
         <div className="flex flex-col space-y-2">
           <div className="text-gray-700 font-semibold">Your Mood Activities:</div>
           <input
