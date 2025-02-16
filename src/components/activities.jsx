@@ -1,17 +1,14 @@
-// Activities.jsx
 import React, { useState } from 'react';
-import activitiesData from '../resources/activities.json'; // Import activities data
+import activitiesData from '../resources/activities.json';
 
-const Activities = ({ onNext }) => { // Ensure onNext is being used
+const Activities = ({ onNext }) => {
   const [selectedActivities, setSelectedActivities] = useState([]);
 
   const handleActivityClick = (activityName) => {
     setSelectedActivities((prevSelected) => {
       if (prevSelected.includes(activityName)) {
-        // If already selected, remove it
         return prevSelected.filter((activity) => activity !== activityName);
       } else {
-        // If not selected, add it
         return [...prevSelected, activityName];
       }
     });
@@ -19,35 +16,35 @@ const Activities = ({ onNext }) => { // Ensure onNext is being used
 
   const handleNextClick = () => {
     if (selectedActivities.length > 0) {
-      onNext(selectedActivities); // Pass selected activities to the next step
+      onNext(selectedActivities);
     }
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <h2 className="text-2xl font-semibold mb-4">What have you been up to?</h2>
+    <div className="bg-lavender p-6 rounded-lg shadow-md w-full">
+      <h2 className="text-2xl font-semibold mb-4 text-center">What have you been up to?</h2>
 
-      {/* Activities Grid */}
-      <div className="grid grid-cols-3 gap-4 overflow-y-auto max-h-40">
+      <div className="grid grid-cols-4 gap-4 overflow-y-auto max-h-48 w-full">
         {activitiesData.activities.map((activity, index) => {
           const [activityName, icon] = Object.entries(activity)[0];
           return (
-            <button
-              key={index}
-              className={`text-3xl p-2 ${selectedActivities.includes(activityName) ? 'bg-yellow-300' : ''}`}
-              onClick={() => handleActivityClick(activityName)}
-            >
-              {icon}
-            </button>
+            <div key={index} className="flex flex-col items-center">
+              <button
+                className={`text-4xl p-3 rounded-lg hover:bg-gray-200 focus:outline-none ${selectedActivities.includes(activityName) ? 'bg-yellow-300' : ''}`}
+                onClick={() => handleActivityClick(activityName)}
+              >
+                {icon}
+              </button>
+              <span className="text-sm mt-1">{activityName}</span>
+            </div>
           );
         })}
       </div>
 
-      {/* Next Button */}
       {selectedActivities.length > 0 && (
         <button
           onClick={handleNextClick}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+          className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 w-full focus:outline-none"
         >
           Next
         </button>
