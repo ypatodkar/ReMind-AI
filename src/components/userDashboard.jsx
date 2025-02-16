@@ -8,6 +8,7 @@ import Affirmation from './Affirmation';
 import AiResponse from './AiResponse';
 import NewUserStats from './NewUserStats'
 import './dashboard.css'
+import Footer from './Footer';
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -83,12 +84,12 @@ const UserDashboard = () => {
     fetchEntries();
   }, []);
 
-  return (
-    <>
+  return  (
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="p-6 bg-gray-50 min-h-screen" style={{ backgroundColor: '#000b6445' }}>
+      <main className="flex-grow p-6 bg-gray-50" style={{ backgroundColor: '#000b6445' }}>
         <h1 className="text-3xl font-bold mb-6 text-center">Your Dashboard</h1>
-
+  
         {/* Check-In Buttons Row */}
         <div className="flex space-x-4 justify-center mb-8">
           {last7Days.map(({ dayName, dayDate }) => (
@@ -100,10 +101,10 @@ const UserDashboard = () => {
               onCheckIn={() => console.log("Check-in clicked!")}
             />
           ))}
-          
         </div>
+  
         <div className="flex flex-col md:flex-row justify-center items-start gap-6">
-          {/* Left Bubble: Mental Health Fact */}
+          {/* Left Bubble */}
           <div className="md:w-1/4 flex justify-end">
             <div className="drop" style={{ "--clr": "#db4ef4" }}>
               <div className="content">
@@ -113,8 +114,8 @@ const UserDashboard = () => {
               </div>
             </div>
           </div>
-          
-          {/* Center Column: Today's Tasks */}
+  
+          {/* Center Column */}
           <div className="md:w-1/2 w-full">
             <h2 className="text-2xl font-semibold mb-4 text-center">Today's Tasks</h2>
             <div className="space-y-4">
@@ -131,15 +132,9 @@ const UserDashboard = () => {
                 onModalOpen={() => setIsAffirmationModalOpen(true)}
               />
             </div>
-            
-            <br />
-            <br />
-            <h1 className='text-center text-lg font-bold'>Previous Stats</h1>
-            <br />
-            <NewUserStats />
           </div>
-
-          {/* Right Bubble: Depression Quote */}
+  
+          {/* Right Bubble */}
           <div className="md:w-1/4 flex justify-start">
             <div className="drop" style={{ "--clr": "#3a9cf1" }}>
               <div className="content">
@@ -150,7 +145,7 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-
+  
         {/* Modals */}
         {isCheckInModalOpen && (
           <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} setAiResponse={setAiResponse} />
@@ -159,11 +154,12 @@ const UserDashboard = () => {
           <Affirmation closeModal={() => setIsAffirmationModalOpen(false)} onDone={markAffirmationAsDone} />
         )}
         {aiResponse ? <AiResponse data={aiResponse} /> : <p></p>}
-      </div>
-      
-    </>
-    
+      </main>
+  
+      <Footer />
+    </div>
   );
+  
 };
 
 export default UserDashboard;

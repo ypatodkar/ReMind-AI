@@ -27,6 +27,14 @@ const Navbar = () => {
           Take Autism Test
         </button>
       </div>
+      <div className="flex space-x-6">
+        <button
+          onClick={() => navigate('/user-stats')}
+          style={{ border: '1px solid green', borderRadius: '6px'}}
+          className="hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
+          User Stats
+        </button>
+      </div>
 
       <div className="flex space-x-6">
         <a
