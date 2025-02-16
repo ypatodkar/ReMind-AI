@@ -4,7 +4,10 @@ import Navbar from './navBar';
 import CheckInModal from './CheckInModal';
 import CheckInButton from './CheckInButton';
 import Task from './Task';
-import Affirmation from './Affirmation';
+import Affirmation from './Affirmation'; // Import Affirmation modal
+import NewUserStats from './NewUserStats';
+import AiResponse from './AiResponse';
+
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -118,6 +121,8 @@ const UserDashboard = () => {
           <Affirmation closeModal={closeAffirmationModal} onDone={markAffirmationAsDone} />
         )}
       </div>
+
+      
     </>
   );
 };
