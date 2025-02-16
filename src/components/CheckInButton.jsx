@@ -1,15 +1,18 @@
-// CheckInButton.js
 import React from 'react';
 
 const CheckInButton = ({ dayName, dayDate, day, isChecked, onCheckIn }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center flex-shrink-0">
       <button
-        className={`w-24 h-24 flex flex-col items-center justify-center rounded-full text-white font-semibold ${isChecked ? 'bg-green-500' : 'bg-gray-500'}`}
         onClick={() => onCheckIn(day)}
+        className={`w-24 h-16 flex flex-col items-center justify-center rounded-xl shadow-lg transition-all duration-300 ${
+          isChecked
+            ? 'bg-gradient-to-r from-green-400 to-teal-400'
+            : 'bg-gray-200 hover:bg-gray-300'
+        }`}
       >
-        <span className="text-sm">{dayName}</span> 
-        <span className="text-xl">{dayDate.slice(5, 10)}</span> {/* Show only MM/DD */}
+        <span className="text-xs font-medium text-gray-800">{dayName}</span>
+        <span className="text-lg font-bold text-gray-800">{dayDate.slice(5, 10)}</span>
       </button>
     </div>
   );

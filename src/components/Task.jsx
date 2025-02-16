@@ -1,5 +1,6 @@
-// Task.js
 import React from 'react';
+import checkin from '../images/checkin.png';
+import affirmation from '../images/affirmation.png';
 
 const Task = ({ task, isChecked, onTaskCheck, onModalOpen }) => {
   return (
@@ -10,9 +11,15 @@ const Task = ({ task, isChecked, onTaskCheck, onModalOpen }) => {
         onChange={() => onTaskCheck(task)}
       />
       <div className="bg-gray-800 text-white p-4 rounded-lg flex items-center w-full">
-        <img src={`/${task}.png`} alt={task} className="w-16 h-16 mr-4" />
+        <img 
+          src={task === 'affirmation' ? affirmation : checkin} 
+          alt={`${task} icon`} 
+          className="w-16 h-16 mr-4" 
+        />
         <div className="flex-1">
-          <h2 className="text-lg font-semibold">{task.charAt(0).toUpperCase() + task.slice(1)}</h2>
+          <h2 className="text-lg font-semibold">
+            {task.charAt(0).toUpperCase() + task.slice(1)}
+          </h2>
           <p className="text-sm">{`Stay positive with daily ${task}s`}</p>
         </div>
         {task === 'affirmation' && (
@@ -25,7 +32,7 @@ const Task = ({ task, isChecked, onTaskCheck, onModalOpen }) => {
         )}
         {task === 'checkin' && (
           <button
-            onClick={onModalOpen}  // Open CheckIn Modal
+            onClick={onModalOpen}
             className="bg-blue-500 text-white py-2 px-4 rounded-md"
           >
             Check-In
