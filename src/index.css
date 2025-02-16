@@ -1,3 +1,105 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+.animate-fadeOut {
+  animation: fadeOut 2s forwards;
+}
+
+/* Drop bubble template */
+.drop {
+  width: 350px;
+  height: 350px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05),
+              25px 35px 20px rgba(0, 0, 0, 0.05),
+              25px 20px 20px rgba(0, 0, 0, 0.05),
+              inset 25px 30px 30px rgba(255, 255, 255, 0.9);
+}
+.drop:nth-child(1) {
+  border-radius: 67% 33% 28% 72% / 59% 52% 48% 41%;
+  margin: 20px 30px 30px 0;
+}
+.drop:nth-child(2) {
+  border-radius: 15% 85% 53% 47% / 55% 41% 59% 45%;
+}
+.drop::before {
+  content: '';
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background-color: #ffffffc8;
+  top: 50px;
+  left: 80px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.drop::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #ffffffc8;
+  top: 90px;
+  left: 110px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 40px 60px;
+  gap: 15px;
+}
+.content h2 {
+  margin-bottom: 15px;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: var(--clr);
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
+              inset -2px -5px 10px rgba(255,255,255,1),
+              15px 15px 10px rgba(0,0,0,0.05),
+              15px 10px 15px rgba(0,0,0,0.25);
+}
+.content a {
+  padding: 10px 20px;
+  background-color: var(--clr);
+  border-radius: 20px;
+  color: #fff;
+  text-shadow: 2px 5px 5px rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
+              inset -2px -5px 10px rgba(255,255,255,0.1),
+              10px 10px 5px rgba(0,0,0,0.05),
+              10px 10px 5px rgba(0,0,0,0.25);
+}
+.content a:hover {
+  background-color: #fff;
+  color: var(--clr);
+}
