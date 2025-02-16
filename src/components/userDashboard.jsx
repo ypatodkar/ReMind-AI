@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './navBar';
 import CheckInModal from './checkInModal';
@@ -66,67 +66,91 @@ const UserDashboard = () => {
 
   const last7Days = getLast7Days();
 
+
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        const userId = localStorage.getItem("user_id")
+        const response = await fetch(`http://localhost:5000/dashboard/entries?user_id=${userId}`);
+        const data = await response.json();
+
+        // Extract check-in dates from API response
+        const checkedInDates = data.map(entry => new Date(entry.date).toLocaleDateString('en-US'));
+
+        // Filter last 7 days to check which ones were checked in
+        const checkedDays = last7Days
+          .filter(day => checkedInDates.includes(day.dayDate))
+          .map(day => day.dayDate);
+
+        setCheckedInDays(checkedDays);
+      } catch (error) {
+        console.error("Error fetching check-in data:", error);
+      }
+    };
+
+    fetchEntries();
+  }, []);
+
   return (
     <>
       <Navbar />
-      <div className="p-6 bg-gray-50 min-h-screen" style={{ backgroundColor: '#000b6445'}}>
+      <div className="p-6 bg-gray-50 min-h-screen" style={{ backgroundColor: '#000b6445' }}>
         <h1 className="text-3xl font-bold mb-6 text-center">Your Dashboard</h1>
 
         {/* Check-In Buttons Row */}
         <div className="flex space-x-4 justify-center mb-8">
-          {last7Days.map(({ dayName, dayDate, day }) => (
+          {last7Days.map(({ dayName, dayDate }) => (
             <CheckInButton
-              key={day}
+              key={dayDate}
               dayName={dayName}
               dayDate={dayDate}
-              day={day}
-              isChecked={checkedInDays.includes(day)}
-              onCheckIn={handleCheckIn}
+              isChecked={checkedInDays.includes(dayDate)}
+              onCheckIn={() => console.log("Check-in clicked!")}
             />
           ))}
         </div>
         <div className="flex flex-col md:flex-row justify-center items-start gap-6">
-  {/* Left Bubble: Mental Health Fact */}
-  <div className="md:w-1/4 flex justify-end">
-    <div className="drop" style={{ "--clr": "#db4ef4" }}>
-      <div className="content">
-        <h2>01</h2>
-        <p>{mentalHealthFacts[0]}</p>
-        <a href="#">Read More</a>
-      </div>
-    </div>
-  </div>
+          {/* Left Bubble: Mental Health Fact */}
+          <div className="md:w-1/4 flex justify-end">
+            <div className="drop" style={{ "--clr": "#db4ef4" }}>
+              <div className="content">
+                <h2>01</h2>
+                <p>{mentalHealthFacts[0]}</p>
+                <a href="#">Read More</a>
+              </div>
+            </div>
+          </div>
 
-  {/* Center Column: Today's Tasks */}
-  <div className="md:w-1/2 w-full">
-    <h2 className="text-2xl font-semibold mb-4 text-center">Today's Tasks</h2>
-    <div className="space-y-4">
-      <Task
-        task="checkin"
-        isChecked={checkedTasks.includes('checkin')}
-        onTaskCheck={handleTaskCheck}
-        onModalOpen={openCheckInModal}
-      />
-      <Task
-        task="affirmation"
-        isChecked={checkedTasks.includes('affirmation')}
-        onTaskCheck={handleTaskCheck}
-        onModalOpen={openAffirmationModal}
-      />
-    </div>
-  </div>
+          {/* Center Column: Today's Tasks */}
+          <div className="md:w-1/2 w-full">
+            <h2 className="text-2xl font-semibold mb-4 text-center">Today's Tasks</h2>
+            <div className="space-y-4">
+              <Task
+                task="checkin"
+                isChecked={checkedTasks.includes('checkin')}
+                onTaskCheck={handleTaskCheck}
+                onModalOpen={openCheckInModal}
+              />
+              <Task
+                task="affirmation"
+                isChecked={checkedTasks.includes('affirmation')}
+                onTaskCheck={handleTaskCheck}
+                onModalOpen={openAffirmationModal}
+              />
+            </div>
+          </div>
 
-  {/* Right Bubble: Depression Quote */}
-  <div className="md:w-1/4 flex justify-start">
-    <div className="drop" style={{ "--clr": "#3a9cf1" }}>
-      <div className="content">
-        <h2>02</h2>
-        <p>{depressionQuotes[0]}</p>
-        <a href="#">Read More</a>
-      </div>
-    </div>
-  </div>
-</div>
+          {/* Right Bubble: Depression Quote */}
+          <div className="md:w-1/4 flex justify-start">
+            <div className="drop" style={{ "--clr": "#3a9cf1" }}>
+              <div className="content">
+                <h2>02</h2>
+                <p>{depressionQuotes[0]}</p>
+                <a href="#">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Fixed Bubble Cards on either side of the tasks */}
         <div className="hidden md:grid md:grid-cols-3 gap-6 items-center">
@@ -141,7 +165,7 @@ const UserDashboard = () => {
 
         {/* Modals */}
         {isCheckInModalOpen && (
-          <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} setAiResponse={setAiResponse}/>
+          <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} setAiResponse={setAiResponse} />
         )}
         {isAffirmationModalOpen && (
           <Affirmation closeModal={closeAffirmationModal} onDone={markAffirmationAsDone} />
