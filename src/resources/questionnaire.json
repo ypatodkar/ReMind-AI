@@ -1,0 +1,67 @@
+{
+    "title": "Autism Screening Questionnaire",
+    "instructions": "For each statement, please rate on a scale from 1 (Strongly Disagree) to 10 (Strongly Agree). This questionnaire is for self-assessment purposes only and is not a diagnostic tool.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "I find it difficult to start or maintain a conversation with others."
+      },
+      {
+        "id": 2,
+        "text": "I often struggle to understand or respond to other people's emotions."
+      },
+      {
+        "id": 3,
+        "text": "I have difficulty interpreting nonverbal cues, such as facial expressions and body language."
+      },
+      {
+        "id": 4,
+        "text": "I prefer to follow a strict routine and find unexpected changes upsetting."
+      },
+      {
+        "id": 5,
+        "text": "I am easily overwhelmed by bright lights, loud noises, or strong smells."
+      },
+      {
+        "id": 6,
+        "text": "I tend to have very focused and intense interests in specific topics."
+      },
+      {
+        "id": 7,
+        "text": "I feel more comfortable engaging in solitary activities than social gatherings."
+      },
+      {
+        "id": 8,
+        "text": "I sometimes find it challenging to understand sarcasm or subtle humor."
+      },
+      {
+        "id": 9,
+        "text": "I notice details in my environment that others might overlook."
+      },
+      {
+        "id": 10,
+        "text": "I find it difficult to adapt quickly to new situations or environments."
+      },
+      {
+        "id": 11,
+        "text": "I prefer clear, direct communication over indirect or abstract language."
+      },
+      {
+        "id": 12,
+        "text": "I occasionally struggle with coordinating my movements or activities."
+      },
+      {
+        "id": 13,
+        "text": "I sometimes feel overwhelmed by the emotional intensity of social situations."
+      },
+      {
+        "id": 14,
+        "text": "I feel more comfortable when expectations and rules are explicitly stated."
+      },
+      {
+        "id": 15,
+        "text": "I believe my way of thinking or processing information is different from most people’s."
+      }
+    ]
+  }
+  
