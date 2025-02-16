@@ -25,9 +25,8 @@ const AuthPage = () => {
       if (!response.ok) {
         throw new Error(data.message || 'Authentication failed');
       }
-      console.log('User ID:', data.userId);
       // Store user_id in localStorage for global access
-      localStorage.setItem('user_id', data.userId);
+      localStorage.setItem('user_id', data.user_id);
       // If signing up, navigate to /userForm, otherwise navigate to /dashboard
       if (isSignUp) {
         navigate('/userForm');
