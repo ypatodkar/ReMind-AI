@@ -3,17 +3,33 @@
 @import "tailwindcss/utilities";
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
+
 .animate-fadeIn {
   animation: fadeIn 2s forwards;
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(0.95); }
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
+
 .animate-fadeOut {
   animation: fadeOut 2s forwards;
 }
@@ -28,17 +44,20 @@
   justify-content: center;
   flex-wrap: wrap;
   box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05),
-              25px 35px 20px rgba(0, 0, 0, 0.05),
-              25px 20px 20px rgba(0, 0, 0, 0.05),
-              inset 25px 30px 30px rgba(255, 255, 255, 0.9);
+    25px 35px 20px rgba(0, 0, 0, 0.05),
+    25px 20px 20px rgba(0, 0, 0, 0.05),
+    inset 25px 30px 30px rgba(255, 255, 255, 0.9);
 }
+
 .drop:nth-child(1) {
   border-radius: 67% 33% 28% 72% / 59% 52% 48% 41%;
   margin: 20px 30px 30px 0;
 }
+
 .drop:nth-child(2) {
   border-radius: 15% 85% 53% 47% / 55% 41% 59% 45%;
 }
+
 .drop::before {
   content: '';
   position: absolute;
@@ -50,6 +69,7 @@
   border-radius: 50%;
   opacity: 0.8;
 }
+
 .drop::after {
   content: '';
   position: absolute;
@@ -61,6 +81,7 @@
   border-radius: 50%;
   opacity: 0.8;
 }
+
 .content {
   display: flex;
   align-items: center;
@@ -70,6 +91,7 @@
   padding: 40px 60px;
   gap: 15px;
 }
+
 .content h2 {
   margin-bottom: 15px;
   width: 60px;
@@ -81,24 +103,26 @@
   justify-content: center;
   font-size: 2em;
   color: var(--clr);
-  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
-              inset -2px -5px 10px rgba(255,255,255,1),
-              15px 15px 10px rgba(0,0,0,0.05),
-              15px 10px 15px rgba(0,0,0,0.25);
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1),
+    inset -2px -5px 10px rgba(255, 255, 255, 1),
+    15px 15px 10px rgba(0, 0, 0, 0.05),
+    15px 10px 15px rgba(0, 0, 0, 0.25);
 }
+
 .content a {
   padding: 10px 20px;
   background-color: var(--clr);
   border-radius: 20px;
   color: #fff;
-  text-shadow: 2px 5px 5px rgba(255,255,255,0.5);
+  text-shadow: 2px 5px 5px rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: background-color 0.5s, color 0.5s;
-  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
-              inset -2px -5px 10px rgba(255,255,255,0.1),
-              10px 10px 5px rgba(0,0,0,0.05),
-              10px 10px 5px rgba(0,0,0,0.25);
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1),
+    inset -2px -5px 10px rgba(255, 255, 255, 0.1),
+    10px 10px 5px rgba(0, 0, 0, 0.05),
+    10px 10px 5px rgba(0, 0, 0, 0.25);
 }
+
 .content a:hover {
   background-color: #fff;
   color: var(--clr);
