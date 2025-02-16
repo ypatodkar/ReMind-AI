@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Navbar from './navBar';
+import CheckInModal from './checkInModal';
+
 const UserDashboard = () => {
   const [checkedInDays, setCheckedInDays] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to track modal visibility
 
   const handleCheckIn = (day) => {
     setCheckedInDays((prev) => 
@@ -27,26 +30,35 @@ const UserDashboard = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4 text-center">Your Dashboard</h1>
-      
-      <div className="flex space-x-4 justify-center">
-        {last7Days.map(({ dayName, dayDate, day }) => (
-          <div key={day} className="flex flex-col items-center">
-            <button
-              className={`w-24 h-24 flex flex-col items-center justify-center rounded-full text-white font-semibold ${checkedInDays.includes(day) ? 'bg-green-500' : 'bg-gray-500'}`}
-              onClick={() => handleCheckIn(day)}
-            >
-              <span className="text-sm">{dayName}</span> 
-              <span className="text-xl">{dayDate.slice(5, 10)}</span> {/* Show only MM/DD */}
-            </button>
-          </div>
-        ))}
+      <Navbar />
+      <div className="p-6">
+        <h1 className="text-2xl font-semibold mb-4 text-center">Your Dashboard</h1>
+        
+        <div className="flex space-x-4 justify-center">
+          {last7Days.map(({ dayName, dayDate, day }) => (
+            <div key={day} className="flex flex-col items-center">
+              <button
+                className={`w-24 h-24 flex flex-col items-center justify-center rounded-full text-white font-semibold ${checkedInDays.includes(day) ? 'bg-green-500' : 'bg-gray-500'}`}
+                onClick={() => handleCheckIn(day)}
+              >
+                <span className="text-sm">{dayName}</span> 
+                <span className="text-xl">{dayDate.slice(5, 10)}</span> {/* Show only MM/DD */}
+              </button>
+            </div>
+          ))}
+        </div>
+        
+        <button 
+          onClick={() => setIsModalOpen(true)} // Open modal on click
+          className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md"
+        >
+          CheckIn
+        </button>
       </div>
-    </div>
+
+      {/* Modal */}
+      {isModalOpen && <CheckInModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
     </>
-    
   );
 };
 
