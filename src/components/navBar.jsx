@@ -22,17 +22,31 @@ const Navbar = () => {
       <div className="flex space-x-6">
         <button
           onClick={() => navigate('/autismTest')}
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
-        >
+          style={{ border: '1px solid green', borderRadius: '6px'}}
+          className="hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
           Take Autism Test
         </button>
+      </div>
+
+      <div className="flex space-x-6">
+        <a
+          href="https://www.scu.edu/bewell/"
+          style={{ border: '1px solid blue', borderRadius: '6px'}}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
+        >
+          Contact Cowell
+        </a>
       </div>
       
       {/* Right: Logout Button */}
       <div>
         <button
           onClick={handleSignOut}
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
+          style={{ border: '1px solid red', borderRadius: '6px'}}
+          
+          className=" hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
         >
           Logout
         </button>

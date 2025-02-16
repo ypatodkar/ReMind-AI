@@ -12,7 +12,7 @@ const CheckInButton = ({ dayName, dayDate, day, isChecked, onCheckIn }) => {
         }`}
       >
         <span className="text-xs font-medium text-gray-800">{dayName}</span>
-        <span className="text-lg font-bold text-gray-800">{dayDate.slice(5, 10)}</span>
+        <span className="text-lg font-bold text-gray-800">{dayDate.slice(0, 4)}</span>
       </button>
     </div>
   );

@@ -4,10 +4,7 @@ import Navbar from './navBar';
 import CheckInModal from './CheckInModal';
 import CheckInButton from './CheckInButton';
 import Task from './Task';
-import Affirmation from './Affirmation'; // Import Affirmation modal
-import NewUserStats from './NewUserStats';
-import AiResponse from './AiResponse';
-
+import Affirmation from './Affirmation';
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -16,7 +13,7 @@ const UserDashboard = () => {
   const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
   const [isAffirmationModalOpen, setIsAffirmationModalOpen] = useState(false);
 
-  // Fixed arrays for facts and quotes
+  // Fixed arrays for content
   const mentalHealthFacts = [
     "1 in 4 people will experience a mental health issue in their lifetime.",
     "Mental and physical health are deeply connected.",
@@ -32,14 +29,14 @@ const UserDashboard = () => {
   ];
 
   const handleTaskCheck = (task) => {
-    setCheckedTasks((prev) =>
-      prev.includes(task) ? prev.filter((t) => t !== task) : [...prev, task]
+    setCheckedTasks(prev =>
+      prev.includes(task) ? prev.filter(t => t !== task) : [...prev, task]
     );
   };
 
   const handleCheckIn = (day) => {
-    setCheckedInDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    setCheckedInDays(prev =>
+      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
     );
   };
 
@@ -61,6 +58,7 @@ const UserDashboard = () => {
       const dayDate = date.toLocaleDateString('en-US');
       days.push({ dayName, dayDate, day: i + 1 });
     }
+    console.log(days);
     return days;
   };
 
@@ -69,7 +67,7 @@ const UserDashboard = () => {
   return (
     <>
       <Navbar />
-      <div className="p-6 bg-gray-50 min-h-screen">
+      <div className="p-6 bg-gray-50 min-h-screen" style={{ backgroundColor: '#000b6445'}}>
         <h1 className="text-3xl font-bold mb-6 text-center">Your Dashboard</h1>
 
         {/* Check-In Buttons Row */}
@@ -85,32 +83,58 @@ const UserDashboard = () => {
             />
           ))}
         </div>
+        <div className="flex flex-col md:flex-row justify-center items-start gap-6">
+  {/* Left Bubble: Mental Health Fact */}
+  <div className="md:w-1/4 flex justify-end">
+    <div className="drop" style={{ "--clr": "#db4ef4" }}>
+      <div className="content">
+        <h2>01</h2>
+        <p>{mentalHealthFacts[0]}</p>
+        <a href="#">Read More</a>
+      </div>
+    </div>
+  </div>
 
-        {/* Today's Tasks Section */}
-        <h2 className="text-2xl font-semibold mb-4 text-center">Today's Tasks</h2>
-        <div className="max-w-3xl mx-auto pl-4 mb-8 space-y-4">
-          <Task
-            task="checkin"
-            isChecked={checkedTasks.includes('checkin')}
-            onTaskCheck={handleTaskCheck}
-            onModalOpen={openCheckInModal}
-          />
-          <Task
-            task="affirmation"
-            isChecked={checkedTasks.includes('affirmation')}
-            onTaskCheck={handleTaskCheck}
-            onModalOpen={openAffirmationModal}
-          />
-        </div>
+  {/* Center Column: Today's Tasks */}
+  <div className="md:w-1/2 w-full">
+    <h2 className="text-2xl font-semibold mb-4 text-center">Today's Tasks</h2>
+    <div className="space-y-4">
+      <Task
+        task="checkin"
+        isChecked={checkedTasks.includes('checkin')}
+        onTaskCheck={handleTaskCheck}
+        onModalOpen={openCheckInModal}
+      />
+      <Task
+        task="affirmation"
+        isChecked={checkedTasks.includes('affirmation')}
+        onTaskCheck={handleTaskCheck}
+        onModalOpen={openAffirmationModal}
+      />
+    </div>
+  </div>
 
-        {/* Fixed Bubble Cards for Mental Health Fact and Depression Quote */}
-        <div className="flex justify-center space-x-6 mt-8">
-          <div className="bg-gradient-to-br from-cyan-100 to-blue-200 border border-blue-200 text-blue-800 p-4 w-52 h-52 flex items-center justify-center rounded-full shadow-sm text-center whitespace-normal break-words">
-            <p className="text-sm">{mentalHealthFacts[0]}</p>
-          </div>
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 w-52 h-52 flex items-center justify-center rounded-full shadow-sm text-center italic whitespace-normal break-words">
-            <p className="text-sm">{depressionQuotes[0]}</p>
-          </div>
+  {/* Right Bubble: Depression Quote */}
+  <div className="md:w-1/4 flex justify-start">
+    <div className="drop" style={{ "--clr": "#3a9cf1" }}>
+      <div className="content">
+        <h2>02</h2>
+        <p>{depressionQuotes[0]}</p>
+        <a href="#">Read More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+        {/* Fixed Bubble Cards on either side of the tasks */}
+        <div className="hidden md:grid md:grid-cols-3 gap-6 items-center">
+
+
+          {/* Center Column: (empty, used only for spacing) */}
+          <div></div>
+
+          {/* Right Bubble: Depression Quote */}
+
         </div>
 
         {/* Modals */}
@@ -121,8 +145,6 @@ const UserDashboard = () => {
           <Affirmation closeModal={closeAffirmationModal} onDone={markAffirmationAsDone} />
         )}
       </div>
-
-      
     </>
   );
 };
