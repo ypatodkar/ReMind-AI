@@ -1,0 +1,145 @@
+/* Overall Container Styles */
+body {
+    background: #f7f7f7;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Navbar Styling */
+  .navbar {
+    background: linear-gradient(90deg, rgba(30, 41, 59, 1) 0%, rgba(37, 99, 235, 1) 100%);
+    padding: 20px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Check-in Button Hover Effect */
+  .check-in-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .check-in-button:hover {
+    background-color: #2563eb;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Floating Effect for .drop */
+  /* Note: Bubble colors remain unchanged via inline styles in your components */
+  .drop {
+    animation: float 4s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .drop:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Task Card Hover Effects */
+  .task-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .task-card:hover {
+    background-color: #f3f4f6;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Button Hover Effects */
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  /* Fade In Animation for Headings */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Gradient Background for Overall Page */
+  .dashboard-container {
+    background: linear-gradient(135deg, #ff7a00, #ffdd00);
+    padding: 30px;
+    min-height: 100vh;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-container h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Flexbox Layout for Centering Elements */
+  .flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Specific Layout Enhancements for Center Content */
+  .center-column {
+    flex: 1;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive Design for Mobile Devices */
+  @media screen and (max-width: 768px) {
+    .flex-row {
+      flex-direction: column;
+    }
+  
+    .center-column {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  

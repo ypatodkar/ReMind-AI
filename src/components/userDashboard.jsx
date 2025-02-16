@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './navBar';
 import CheckInModal from './checkInModal';
@@ -6,6 +6,8 @@ import CheckInButton from './CheckInButton';
 import Task from './Task';
 import Affirmation from './Affirmation';
 import AiResponse from './AiResponse';
+import NewUserStats from './NewUserStats'
+import './dashboard.css'
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -31,23 +33,17 @@ const UserDashboard = () => {
   ];
 
   const handleTaskCheck = (task) => {
-    setCheckedTasks(prev =>
-      prev.includes(task) ? prev.filter(t => t !== task) : [...prev, task]
-    );
+    if (task === 'affirmation' && !checkedTasks.includes('affirmation')) {
+      setCheckedTasks(prev => [...prev, task]);
+    } else if (task !== 'affirmation') {
+      setCheckedTasks(prev =>
+        prev.includes(task) ? prev.filter(t => t !== task) : [...prev, task]
+      );
+    }
   };
 
-  const handleCheckIn = (day) => {
-    setCheckedInDays(prev =>
-      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
-    );
-  };
-
-  const openCheckInModal = () => setIsCheckInModalOpen(true);
-  const closeCheckInModal = () => setIsCheckInModalOpen(false);
-  const openAffirmationModal = () => setIsAffirmationModalOpen(true);
-  const closeAffirmationModal = () => setIsAffirmationModalOpen(false);
   const markAffirmationAsDone = () => {
-    handleTaskCheck('affirmation');
+    handleTaskCheck('affirmation'); // Mark affirmation as done
   };
 
   const getLast7Days = () => {
@@ -60,12 +56,10 @@ const UserDashboard = () => {
       const dayDate = date.toLocaleDateString('en-US');
       days.push({ dayName, dayDate, day: i + 1 });
     }
-    console.log(days);
     return days;
   };
 
   const last7Days = getLast7Days();
-
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -74,10 +68,8 @@ const UserDashboard = () => {
         const response = await fetch(`http://localhost:5000/dashboard/entries?user_id=${userId}`);
         const data = await response.json();
 
-        // Extract check-in dates from API response
         const checkedInDates = data.map(entry => new Date(entry.date).toLocaleDateString('en-US'));
 
-        // Filter last 7 days to check which ones were checked in
         const checkedDays = last7Days
           .filter(day => checkedInDates.includes(day.dayDate))
           .map(day => day.dayDate);
@@ -108,6 +100,7 @@ const UserDashboard = () => {
               onCheckIn={() => console.log("Check-in clicked!")}
             />
           ))}
+          
         </div>
         <div className="flex flex-col md:flex-row justify-center items-start gap-6">
           {/* Left Bubble: Mental Health Fact */}
@@ -120,7 +113,7 @@ const UserDashboard = () => {
               </div>
             </div>
           </div>
-
+          
           {/* Center Column: Today's Tasks */}
           <div className="md:w-1/2 w-full">
             <h2 className="text-2xl font-semibold mb-4 text-center">Today's Tasks</h2>
@@ -129,15 +122,21 @@ const UserDashboard = () => {
                 task="checkin"
                 isChecked={checkedTasks.includes('checkin')}
                 onTaskCheck={handleTaskCheck}
-                onModalOpen={openCheckInModal}
+                onModalOpen={() => setIsCheckInModalOpen(true)}
               />
               <Task
                 task="affirmation"
                 isChecked={checkedTasks.includes('affirmation')}
                 onTaskCheck={handleTaskCheck}
-                onModalOpen={openAffirmationModal}
+                onModalOpen={() => setIsAffirmationModalOpen(true)}
               />
             </div>
+            
+            <br />
+            <br />
+            <h1 className='text-center text-lg font-bold'>Previous Stats</h1>
+            <br />
+            <NewUserStats />
           </div>
 
           {/* Right Bubble: Depression Quote */}
@@ -152,27 +151,18 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        {/* Fixed Bubble Cards on either side of the tasks */}
-        <div className="hidden md:grid md:grid-cols-3 gap-6 items-center">
-
-
-          {/* Center Column: (empty, used only for spacing) */}
-          <div></div>
-
-          {/* Right Bubble: Depression Quote */}
-
-        </div>
-
         {/* Modals */}
         {isCheckInModalOpen && (
           <CheckInModal isModalOpen={isCheckInModalOpen} setIsModalOpen={setIsCheckInModalOpen} setAiResponse={setAiResponse} />
         )}
         {isAffirmationModalOpen && (
-          <Affirmation closeModal={closeAffirmationModal} onDone={markAffirmationAsDone} />
+          <Affirmation closeModal={() => setIsAffirmationModalOpen(false)} onDone={markAffirmationAsDone} />
         )}
-        {aiResponse ? <AiResponse data={aiResponse} /> : <p>Loading...</p>}
+        {aiResponse ? <AiResponse data={aiResponse} /> : <p></p>}
       </div>
+      
     </>
+    
   );
 };
 

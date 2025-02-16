@@ -8,7 +8,8 @@ const Task = ({ task, isChecked, onTaskCheck, onModalOpen }) => {
       <input
         type="checkbox"
         checked={isChecked}
-        onChange={() => onTaskCheck(task)}
+        onChange={() => onTaskCheck(task)} // Checkbox toggles based on task check logic
+        className="w-6 h-6 accent-green-500 cursor-pointer"
       />
       <div className="bg-gray-800 text-white p-4 rounded-lg flex items-center w-full">
         <img 
@@ -42,5 +43,6 @@ const Task = ({ task, isChecked, onTaskCheck, onModalOpen }) => {
     </div>
   );
 };
+
 
 export default Task;

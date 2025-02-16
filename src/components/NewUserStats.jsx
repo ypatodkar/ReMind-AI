@@ -10,7 +10,7 @@ const NewUserStats = () => {
           alt="Profile" 
           className="absolute inset-0 object-cover w-full h-full rounded-full opacity-50"
         />
-        <div className="relative text-2xl font-bold text-white">
+        <div className="relative text-2xl font-bold ">
           <span>Score: 85</span>
         </div>
       </div>
@@ -30,16 +30,16 @@ const NewUserStats = () => {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h1 className="text-2xl font-semibold text-gray-700">Depression level: 29%</h1>
+          <h1 className="text-2xl font-semibold text-gray-700">Depression level: 40%</h1>
           <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-            <div className="bg-yellow-400 h-2.5 rounded-full" style={{ width: '29%' }}></div>
+            <div className="bg-yellow-400 h-2.5 rounded-full" style={{ width: '40%' }}></div>
           </div>
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h1 className="text-2xl font-semibold text-gray-700">Stress level: 29%</h1>
+          <h1 className="text-2xl font-semibold text-gray-700">Stress level: 19%</h1>
           <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-            <div className="bg-blue-400 h-2.5 rounded-full" style={{ width: '29%' }}></div>
+            <div className="bg-blue-400 h-2.5 rounded-full" style={{ width: '19%' }}></div>
           </div>
         </div>
       </div>
